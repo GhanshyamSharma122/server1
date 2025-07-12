@@ -32,7 +32,7 @@ const userSchema=new mongoose.Schema({
     type:{
         type:String,
         required:true,
-        enum:["admin","donor","volunteer1","volunteer2"]
+        enum:["admin","user","beneficiary","volunteer2"]
     },
     password:{
         type:String,
