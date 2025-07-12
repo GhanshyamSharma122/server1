@@ -4,27 +4,10 @@ const donorSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    start:{
-        type:Date,
+    amount:{
+        type:Number,
         required:true
-    },
-    end:{
-        type:Date,
-        required:true
-    },
-    voluteers:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
-        }
-    ],
-    benficiary:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
-        }
-    ]
-
+    }
 },
 {timestamps:true})
-export const Event=mongoose.model("Event",eventSchema)
+export const Donor=mongoose.model("Donor",donorSchema)
