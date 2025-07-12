@@ -2,14 +2,16 @@ import { Transaction } from "../models/transaction.model.js"
 import { ApiError } from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
-import {Joi} from "joi"
-
+import Joi from "joi"
+import {uploadOnCloudinary} from "../utils/cloudinary.js"
 const createTransaction=asyncHandler(async(req,res)=>{
+    
     const schema=Joi.object({
-        amount:Joi.Number().required(),
-        purpose:Joi.String().required(),
-        remarks:Joi.String().required(),
+        amount:Joi.number().required(),
+        purpose:Joi.string().required(),
+        remarks:Joi.string().required(),
     })
+    const {amount,purpose,remarks}=req.body
     const {error}=schema.validate(req.body)
     if(error){
         throw new ApiError(400,error.details[0].message)
