@@ -48,7 +48,10 @@ const registerUser = asyncHandler(async (req, res) => {
         .required()
 })
 
-    userSchema.validate(req.body)
+    const {error}=userSchema.validate(req.body)
+    if(error){
+        throw new ApiError(400,error.details[0].message)
+    }
     const {name,email,aadhar,phone,address,type,password}=req.body
     const existedUser = await User.findOne({
         aadhar,})
@@ -78,7 +81,10 @@ const loginUser = asyncHandler(async (req, res) => {
         phone:Joi.string().required(),
         password:Joi.string().required()
     })
-    loginSchema.validate(req.body)
+    const {error}=loginSchema.validate(req.body)
+    if(error){
+        throw new ApiError(400,error.details[0].message)
+    }
     const { phone, password } = req.body
     if (!phone) {
         throw new ApiError(400, "phone is required")
@@ -149,7 +155,7 @@ const refershAccessToken = asyncHandler(async (req, res) => {
         const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
         const user = await User.findById(decodedToken?._id)
         if (!user) {
-            throw new ApiError("invalid refresh token")
+            throw new ApiError(401,"invalid refresh token")
         }
         if (incomingRefreshToken !== user?.refreshToken) {
             throw new ApiError(401, "refresh token is expired or used")
