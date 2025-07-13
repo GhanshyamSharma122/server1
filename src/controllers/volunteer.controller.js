@@ -62,4 +62,37 @@ const post=asyncHandler(async (req,res) => {
     )
     
 })
-export {rsvp,post}
+const leaderboard=asyncHandler(async (req,res) => {
+    const result = await Event.aggregate([
+        { $unwind: "$voluteers" },
+        { $group: {
+            _id: "$voluteers",
+            eventCount: { $sum: 1 }
+        }},
+        { $lookup: {
+            from: "users",
+            localField: "_id",
+            foreignField: "_id",
+            as: "volunteer"
+        }},
+        { $unwind: "$volunteer" },
+        { $match: {
+            "volunteer.type": { $in: ["user", "volunteer2"] }
+        }},
+        { $project: {
+            _id: 0,
+            name: "$volunteer.name",
+            eventCount: 1
+        }},
+        { $sort: { eventCount: -1 } }
+    ]);
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,
+            result,
+            "leaderboard fetched"
+        )
+    )
+})
+export {rsvp,post,leaderboard}

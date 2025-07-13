@@ -4,7 +4,7 @@ import { Event } from "../models/event.model.js";
 import Joi from "joi";
 
 const createEvent=asyncHandler(async (req ,res) => {
-        const schema = Joi.object({
+    const schema = Joi.object({
     name: Joi.string().required(),
     start: Joi.date().required(),
     end: Joi.date().required()

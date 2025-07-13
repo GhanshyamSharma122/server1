@@ -1,4 +1,4 @@
-import { required } from "joi";
+
 import mongoose, { trusted } from "mongoose";
 const waitlistSchema=mongoose.Schema({
     name:{
@@ -9,13 +9,9 @@ const waitlistSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    approved_status:{
-        type:Boolean,
-        required:true
-    },
     hitcount:{
         type:Number,
-        required:trusted
+        required:true
     }
 })
 export const Waitlist=mongoose.model("Waitlist",waitlistSchema)

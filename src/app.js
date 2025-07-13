@@ -20,10 +20,14 @@ import transactionRouter from "./routes/transaction.route.js"
 import donorRouter from "./routes/donor.route.js"
 import volunteerRouter from "./routes/volunteer.route.js"
 import eventRouter from "./routes/event.route.js"
+import reportRouter from "./routes/report.route.js"
+import publicRouter from "./routes/public.route.js"
 // routes definition
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/transaction",transactionRouter)
 app.use("/api/v1/donor",donorRouter)
 app.use("/api/v1/volunteer",volunteerRouter)
 app.use("/api/v1/event",eventRouter)
+app.use("/api/v1/report",reportRouter)
+app.use("/api/v1/public",publicRouter)
 export {app}
