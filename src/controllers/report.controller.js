@@ -32,16 +32,15 @@ const report=asyncHandler(async (req ,res)=>{
 
 })
 const getReport=asyncHandler(async(req,res)=>{
-    const report=await Waitlist.find()
     return res
     .status(200)
     .json(
         new ApiResponse(
             200,
-            report,
-            "fetched successfully"
+            await Waitlist.find(),
+            "fetched all the reports"
         )
     )
-
 })
+
 export {report,getReport}
