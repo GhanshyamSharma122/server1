@@ -6,5 +6,5 @@ import { createDonor, getHistory, getStats, } from "../controllers/donor.control
 const router=Router()
 router.post("/create",verifyJWT,roleMiddleware(["user"]),createDonor)
 router.get("/history",verifyJWT,roleMiddleware(["user"]),getHistory)
-router.get("/getStats",verifyJWT,roleMiddleware(["user"]),getStats)
+router.get("/stats",verifyJWT,roleMiddleware(["user"]),getStats)
 export default router
