@@ -32,8 +32,7 @@ const report=asyncHandler(async (req ,res)=>{
 
 })
 const getReport=asyncHandler(async(req,res)=>{
-    const id=req.params.reportId
-    const report=await Waitlist.findById(id)
+    const report=await Waitlist.find()
     return res
     .status(200)
     .json(

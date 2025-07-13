@@ -8,7 +8,7 @@ const postSchema=mongoose.Schema({
     volunteer_id:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        requried:true
+        required:true
     },
     description:{
         type:String,
