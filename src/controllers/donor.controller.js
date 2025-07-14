@@ -12,7 +12,7 @@ const createDonor=asyncHandler(async(req ,res)=>{
         }
     )
     const {error}=schema.validate(req.body)
-    if(!error)
+    if(error)
     {
         throw new ApiError(400,error.details[0].message)
     }
@@ -27,15 +27,15 @@ const createDonor=asyncHandler(async(req ,res)=>{
         new ApiResponse(
             201,
             donor,
-            "dononation done successfully"
+            "donation done successfully"
         )
     )
 })
 const getStats=asyncHandler(async (req,res) => {
-    const amounts=await Donor.find({donor_id:req.user._id,}).select("-donor_id -_id -createdAt -updatedAt")
+    const amounts=await Donor.find({donor_id:req.user._id,}).select("amount -_id")
     let totalAmount=0
     for (let amount of amounts){
-        totalAmount+=amount
+        totalAmount+=amount.amount
     }
     return res
     .status(200)

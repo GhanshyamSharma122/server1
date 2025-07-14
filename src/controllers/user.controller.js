@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         .required(),
     
     type: Joi.string()
-        .valid('admin', 'user', 'volunteer1', 'volunteer2')
+        .valid('admin', 'user', 'beneficiary', 'volunteer2')
         .required(),
     
     password: Joi.string()
